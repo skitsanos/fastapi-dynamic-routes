@@ -1,9 +1,7 @@
 import logging
 import socket
 
-from fastapi import FastAPI
-
-from utils.router import load_routes
+import uvicorn
 
 hostname = socket.gethostname()
 logging.basicConfig(
@@ -14,5 +12,12 @@ logging.basicConfig(
     ]
 )
 
-app = FastAPI()
-load_routes(app, 'routes')
+if __name__ == "__main__":
+    uvicorn.run(
+        app="server:app",
+        reload=True,
+        host="127.0.0.1",
+        port=8000,
+        log_level="debug",
+        log_config=None  # Disables Uvicorn's default logging configuration
+    )

@@ -4,4 +4,4 @@ tasks:
   start:
     cmds:
       - |
-        uvicorn server:app --reload --workers 1
+        python start.py
