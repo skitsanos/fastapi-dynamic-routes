@@ -1,0 +1,7 @@
+version: 3
+
+tasks:
+  start:
+    cmds:
+      - |
+        uvicorn server:app --reload --workers 1
