@@ -20,5 +20,5 @@ if __name__ == "__main__":
         port=8000,
         log_level="debug",
         workers=1,  # just for debugging purposes
-        log_config=None  # Disables Uvicorn's default logging configuration
+        log_config=None  # Disables Unicorn's default logging configuration
     )
