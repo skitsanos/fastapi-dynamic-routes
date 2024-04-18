@@ -1,7 +1,7 @@
 from fastapi import WebSocket
 
 
-async def handler(websocket:WebSocket):
+async def handler(websocket: WebSocket):
     chat_id = websocket.scope['path_params']['chat_id']
 
     await websocket.accept()
