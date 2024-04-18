@@ -187,3 +187,31 @@ When deploying WebSocket handlers, consider the following:
 - **Testing**: Testing WebSocket endpoints can be more challenging than HTTP endpoints. Tools like WebSocket clients, custom scripts, or integration tests with WebSocket support are essential.
 - **Scalability**: Consider how WebSockets will scale with your application. Solutions like WebSocket proxies, load balancers, or cloud services that support WebSockets must be planned according to the expected load.
 
+## `load_routes` Explained
+
+The `load_routes` function in a FastAPI application plays a critical role in simplifying the API development process by automating the registration of route handlers based on a predefined directory structure. This dynamic loading mechanism enhances the application's modularity, scalability, and maintainability. Here's an overview of what the `load_routes` function does:
+
+### Purpose of `load_routes`
+
+1. **Dynamic Route Registration**: Instead of manually registering each API endpoint in your FastAPI application, `load_routes` scans a specified directory for Python files that define route handlers and automatically registers these endpoints with FastAPI. This is particularly useful for large applications with many endpoints, as it helps keep the application setup clean and easy to manage.
+2. **Organized Code Structure**: By organizing route handlers into files and directories that reflect the URL structure of the API, `load_routes` encourages a clean and intuitive project organization. Each endpoint's logic can be isolated in its own file, making the code easier to navigate and maintain.
+3. **Reduced Boilerplate**: This function reduces the repetitive task of route setup in the main application file, minimizing errors and boilerplate code. Adding a new endpoint can be as simple as adding a new handler file in the appropriate directory without modifying the central application configuration.
+
+```python
+import logging
+import socket
+
+from fastapi import FastAPI
+
+from utils.router import load_routes
+
+app = FastAPI()
+load_routes(app, 'routes')
+```
+
+### How `load_routes` Works
+
+- **Directory Traversal**: `load_routes` traverses the specified directory recursively.
+- **File Identification**: For each file that matches a predefined pattern (typically named after HTTP methods like `get.py`, `post.py`, etc.), the function reads the file to locate a route handler function.
+- **Path Construction**: It constructs the path for each endpoint from the directory structure. For example, a file located at `./routes/users/get.py` would be registered to handle GET requests at the `/users` endpoint.
+- **Handler Registration**: Each discovered handler is registered to the FastAPI application with its corresponding HTTP method and path. This registration includes configuring path parameters, query parameters, and other operational details defined in the handler function.
