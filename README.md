@@ -1,5 +1,5 @@
 # fastapi-dynamic-routes
-> Template repository for creating a new project powered by FastAPI
+> Template repository for creating a new project powered by FastAPI and `load_routes`
 
 ## ASGI vs WSGI
 
