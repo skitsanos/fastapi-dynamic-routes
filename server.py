@@ -2,6 +2,8 @@ import logging
 import socket
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 from utils.router import load_routes
 
@@ -15,4 +17,7 @@ logging.basicConfig(
 )
 
 app = FastAPI()
+
+app.mount("/assets", StaticFiles(directory="templates/assets"), name="assets")
+
 load_routes(app, 'routes')

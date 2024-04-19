@@ -13,7 +13,7 @@ const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
 const appendMessage = (domChat, fromName, img, position, text) =>
 {
-    const msgHTML = `
+    const elHtml = `
     <div class="msg ${position}-msg">
       <div class="msg-img" style="background-image: url(${img})"></div>
 
@@ -28,7 +28,7 @@ const appendMessage = (domChat, fromName, img, position, text) =>
     </div>
   `;
 
-    domChat.insertAdjacentHTML('beforeend', msgHTML);
+    domChat.insertAdjacentHTML('beforeend', elHtml);
     domChat.scrollTop += 500;
 };
 
@@ -48,7 +48,7 @@ window.addEventListener('load', () =>
         onopen: () =>
         {
             console.log('Connected');
-            appendMessage(messengerChatList, BOT_NAME, BOT_IMG, 'left', 'Connected. Hi, and welcome to Random Chat! Go ahead and send me a message.');
+            appendMessage(messengerChatList, BOT_NAME, BOT_IMG, 'left', 'Hi, and welcome to Random Chat! Go ahead and send me a message.');
         },
         onclose: () => console.log('Disconnected'),
         onmessage: (event) =>
