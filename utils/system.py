@@ -12,3 +12,6 @@ def check_env(env_vars):
     :return: True if all environment variables are present, False otherwise.
     """
     return all(var in os.environ for var in env_vars)
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

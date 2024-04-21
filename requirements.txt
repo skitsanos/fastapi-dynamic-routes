@@ -3,3 +3,6 @@ uvicorn
 websockets
 jinja2
 mistune
+pydantic
+python-multipart
+

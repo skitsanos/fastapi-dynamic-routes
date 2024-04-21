@@ -1,9 +1,9 @@
 import logging
 import socket
+import time
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 
 from utils.router import load_routes
 
@@ -17,6 +17,16 @@ logging.basicConfig(
 )
 
 app = FastAPI()
+
+
+@app.middleware("http")
+async def add_process_time_header(request: Request, call_next):
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    response.headers["X-Process-Time"] = str(process_time)
+    return response
+
 
 app.mount("/assets", StaticFiles(directory="templates/assets"), name="assets")
 
